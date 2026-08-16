@@ -1,0 +1,14 @@
+{
+  "name": "api-test-1st-backend",
+  "version": "1.0.0",
+  "description": "3-Tier API 실습 - 1차 Backend Tier (REST API, 대시보드 & Socket.io 실시간 채팅)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

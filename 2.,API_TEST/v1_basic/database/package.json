@@ -1,0 +1,14 @@
+{
+  "name": "api-test-1st-database",
+  "version": "1.0.0",
+  "description": "3-Tier API 실습 - 1차 DB Tier (SQLite Gateway, node:sqlite 내장 모듈 사용)",
+  "main": "db_server.js",
+  "scripts": {
+    "init-db": "node --disable-warning=ExperimentalWarning init_db.js",
+    "start": "node --disable-warning=ExperimentalWarning db_server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

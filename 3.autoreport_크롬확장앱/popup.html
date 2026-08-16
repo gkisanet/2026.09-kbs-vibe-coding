@@ -1,0 +1,587 @@
+﻿<html>
+	<head>
+		<style>
+			body {
+				width: 760px;
+				min-height: 600px;
+				margin: 0;
+				font-family: '굴림체', monospace;
+			}
+
+			#container {
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-template-rows: 85px minmax(100px, auto) minmax(100px, auto) minmax(100px, auto);
+				border: 1px solid black;
+				padding: 1px;
+			}
+
+			#container > div {				
+				width: auto;
+				height: auto;
+				margin: 1px;
+				box-sizing: border-box;
+				border: none;
+				overflow: hidden;
+			}
+
+			.title-block {
+				display: grid;
+				grid-template-columns: 10fr 9fr;
+				grid-template-rows: auto;
+				column-gap: 2px;
+				row-gap: 2px;
+			}
+
+			.report-block {
+				display: grid;
+				grid-template-columns: 10fr 9fr;
+				grid-template-rows: auto 1fr;
+				column-gap: 2px;
+				row-gap: 2px;
+			}
+
+			.report-block > div {
+				box-sizing: border-box;
+				border: none;
+				overflow: hidden;
+			}
+		</style>
+
+		<!-- 공통 -->
+		<style>			
+			.table-common {
+				width: 100%;
+				height: 100%;
+				table-layout: fixed;
+				border-spacing: 0;
+				border-collapse: collapse;
+				font-size: 11pt;
+				font-family: '굴림체';
+				font-weight: normal;
+				text-align: center;
+			}
+
+			.table-common tr.thead {
+				background-color: rgba(97, 130, 214, 10%);
+			}
+
+			.table-common thead tr {
+				background-color: rgba(97, 130, 214, 10%);
+			}
+
+			.table-common td {
+				border: 1px solid black;
+			}
+
+			.table-common td span {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+			}
+
+			.table-document thead tr {
+				height: 0;
+			}
+		</style>
+
+		<!-- 제목 -->
+		<style>
+			#title {
+				border: 1px solid black !important;
+				text-align: center;
+			}
+
+			#title-title > span {
+				font-size: 23pt;
+				font-family: '굴림체';
+				font-weight: bold;
+			}
+
+			#title-menu {
+				height: 20px;
+				margin: 2px 0;
+			}
+
+			#title-menu > div {
+				transition: opacity .3s ease;
+				opacity: 0;
+			}
+
+			#title-menu:hover > div {
+				opacity: 1;
+			}
+
+			#title-date > span {
+				font-size: 14pt;
+				font-family: '굴림체';
+				font-weight: bold;
+			}
+
+			#title-menu-date {
+				width: 20px;
+				height: 100%;
+				display: inline-block;
+				padding: 0;
+				border: 1px solid black;
+				box-sizing: border-box;
+				vertical-align: bottom;
+			}
+
+			.menu-button {
+				width: 20px;
+				height: 100%;
+				display: inline-block;
+				border: 1px solid black;
+				box-sizing: border-box;
+
+			}
+
+			#title-menu-yesterday:after {
+				content: '\002190';
+			}
+
+			#title-menu-tomorrow:after {
+				content: '\002192';
+			}
+
+			#title-menu-refresh:after {
+				content: '\0021BB';
+			}
+		</style>
+
+		<!-- 결재 -->
+		<style>
+			#sign-table {
+				font-weight: bold;
+			}
+
+			#sign-table tr.thead td {
+				width: 30%;
+				height: 12px;
+				padding: 0 25px;
+			}
+
+			#sign-table tr.thead td span {
+				width: 100%;
+				height: auto;
+				display: inline-block;
+				text-align: justify;
+			}
+
+			#sign-table tr.thead td span:after {
+				width: 100%;
+				height: 0;
+				display: inline-block;
+				content: "";
+			}
+
+			#sign-table tr.thead td:first-child {
+				width: 10%;
+				height: 100%;
+				padding: 15px 0;
+				margin-right: 1px;
+				writing-mode: vertical-rl;
+				background-color: rgba(97, 130, 214, 10%);
+			}
+
+			#sign-table tr.thead td:first-child span {
+				width: auto;
+				height: 100%;
+				display: inline-block;
+				text-align: justify;
+			}
+
+			#sign-table tr.thead td:first-child span:after {
+				width: 0;
+				height: 100%;
+				display: inline-block;
+				content: "";
+			}
+
+			#sign-table tr.tbody td {
+				width: 30%;
+				height: 80%;
+			}
+		</style>
+			
+		<!-- 근무 -->
+		<style>
+			.schedule {
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+			}
+
+			.worker-table {
+				width: 15%;
+				margin-right: 1px;
+			}
+
+			.worker-table tr:has(td[rowspan]) {
+				height: 100%;
+			}
+
+			.schedule-table {
+				width: 85%;
+				margin-left: 1px;
+			}
+
+			.schedule-table tbody tr:last-child {
+				height: 100%;
+			}
+
+			.schedule-table tbody tr td span {
+				text-overflow:ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+
+			.schedule-table tbody tr td:last-child span {
+				text-align: right;
+			}
+
+			.desc-half {
+			}
+
+			.desc-full {
+				grid-row: span 2;
+			}
+
+			.desc-R {
+				border: 1px solid black !important;
+			}
+
+			.desc-R pre {
+				margin: 2px 0 11pt;
+				overflow-x: hidden;
+				text-overflow: ellipsis;
+				font-size: 11pt;
+				font-family: '굴림체';
+				font-weight: normal;
+			}
+		</style>
+
+		<!-- 탭 & 엑셀 업로드 -->
+		<style>
+			.tab-bar {
+				display: flex;
+				border-bottom: 2px solid #4a6fa5;
+				margin-bottom: 4px;
+			}
+			.tab-bar button {
+				padding: 6px 16px;
+				border: 1px solid #ccc;
+				border-bottom: none;
+				background: #eee;
+				cursor: pointer;
+				font-size: 11pt;
+				font-family: '굴림체';
+				margin-right: 2px;
+				border-radius: 4px 4px 0 0;
+			}
+			.tab-bar button.active {
+				background: #4a6fa5;
+				color: white;
+				font-weight: bold;
+			}
+			.tab-content { display: none; }
+			.tab-content.active { display: block; }
+
+			#excel-tab {
+				padding: 8px;
+			}
+			#excel-tab .upload-area {
+				border: 2px dashed #aaa;
+				padding: 16px;
+				text-align: center;
+				margin-bottom: 8px;
+				border-radius: 6px;
+				background: #f9f9f9;
+			}
+			#excel-tab .upload-area.dragover {
+				border-color: #4a6fa5;
+				background: #e8f0fe;
+			}
+			#excel-tab .file-info {
+				font-size: 10pt;
+				color: #666;
+				margin: 4px 0;
+			}
+			#excel-tab .sheet-selector {
+				margin: 8px 0;
+			}
+			#excel-tab .sheet-selector select {
+				font-family: '돋움체';
+				font-size: 10pt;
+				padding: 2px 8px;
+			}
+			#excel-preview {
+				border: 1px solid #ccc;
+			}
+			#excel-preview table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 10pt;
+			}
+			#excel-preview th {
+				background: #4a6fa5;
+				color: white;
+				padding: 4px 8px;
+				position: sticky;
+				top: 0;
+			}
+			#excel-preview td {
+				border: 1px solid #ddd;
+				padding: 3px 6px;
+			}
+			#excel-preview tr:nth-child(even) {
+				background: #f5f5f5;
+			}
+			#excel-preview .shift-header {
+				background: rgba(97, 130, 214, 15%);
+				font-weight: bold;
+				text-align: center;
+			}
+			#excel-preview .summary-row {
+				background: #fff8e1;
+				font-style: italic;
+			}
+			.btn-erp {
+				padding: 8px 20px;
+				background: #4a6fa5;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 11pt;
+				font-family: '굴림체';
+				margin-top: 8px;
+			}
+			.btn-erp:hover { background: #3a5a8a; }
+			.btn-erp:disabled { background: #aaa; cursor: not-allowed; }
+		</style>
+	</head>
+	<body>
+		<!-- 탭 네비게이션 -->
+		<div class="tab-bar">
+			<button id="tab-btn-excel" class="active" data-tab="excel-tab">📂 엑셀 → ERP</button>
+			<button id="tab-btn-report" data-tab="report-tab">📋 일지 보기</button>
+		</div>
+
+		<!-- 탭 1: 기존 현업일지 뷰어 -->
+		<div id="report-tab" class="tab-content">
+		<div id="container">
+			
+			<!-- 제목 & 결재 -->
+			<div class="title-block">
+				<!-- 제목 -->
+				<div id="title">
+					<div id="title-title">
+						<span>현업일지(TV)</span>
+					</div>
+					<div id="title-menu">
+						<div style="height: 20px;">
+							<input id="title-menu-date" type="date">
+							<span id="title-menu-yesterday" class="menu-button"></span>
+							<span id="title-menu-tomorrow" class="menu-button"></span>
+							<span id="title-menu-refresh" class="menu-button"></span>
+						</div>
+					</div>
+					<div id="title-date">
+						<span>2022. 00. 00. 월요일 맑음</span>
+					</div>
+				</div>
+				<!-- 결제 -->
+				<div id="sign">
+					<table id="sign-table" class="table-common">
+						<tr class="thead">
+							<td rowspan="2"><span>결 재</span></td>
+							<td><span>담 당</span></td>
+							<td><span>감 독</span></td>
+							<td><span>부 장</span></td>
+						</tr>
+						<tr class="tbody">
+							<td><div>&nbsp;</div></td>
+							<td><div>&nbsp;</div></td>
+							<td><div>&nbsp;</div></td>
+						</tr>
+					</table>
+				</div>				
+			</div>
+
+			<!-- 조근 리포트 -->
+			<div class="report-block">
+				<!-- 좌상 : 근무자 & 스케줄 -->
+				<div id="am-schedule" class="schedule">
+					<!-- 근무자 -->
+					<table id="am-worker-table" class="table-common worker-table">
+						<thead>
+							<tr>
+								<td><span>오전</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<!-- 스케줄 -->
+					<table id="am-schedule-table" class="table-common schedule-table">
+						<thead>
+							<tr class="thead">
+								<td width="15%"><span>구분</span></td>
+								<td width="45%"><span>PGM명</span></td>
+								<td width="28%"><span>부터-까지</span></td>
+								<td width="12%"><span>시간</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<!-- 우측 : 특기사항 -->
+				<div id="am-desc-R" class="desc-R desc-full">
+				</div>
+				<!-- 좌하 : 특기사항 -->
+				<div id="am-desc-L" class="desc-L desc-half">
+					<table id="am-desc-L-table" class="table-common table-document">
+						<thead>
+							<tr>
+								<td><span>특기사항</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div>&nbsp;</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 야근 리포트 -->
+			<div class="report-block">
+				<!-- 좌상 : 근무자 & 스케줄 -->
+				<div id="pm-schedule" class="schedule">
+					<!-- 근무자 -->
+					<table id="pm-worker-table" class="table-common worker-table">
+						<thead>
+							<tr>
+								<td><span>오후</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<!-- 스케줄 -->
+					<table id="pm-schedule-table" class="table-common schedule-table">
+						<thead>
+							<tr class="thead">
+								<td width="15%"><span>구분</span></td>
+								<td width="45%"><span>PGM명</span></td>
+								<td width="28%"><span>부터-까지</span></td>
+								<td width="12%"><span>시간</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<!-- 우측 : 특기사항 -->
+				<div id="pm-desc-R" class="desc-R desc-full">
+				</div>
+				<!-- 좌하 : 특기사항 -->
+				<div id="pm-desc-L" class="desc-L desc-half">
+					<table id="pm-desc-L-table" class="table-common table-document">
+						<thead>
+							<tr>
+								<td><span>특기사항</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div>&nbsp;</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 일근 리포트 -->
+			<div class="report-block">
+				<!-- 좌상 : 근무자 & 스케줄 -->
+				<div id="mm-schedule" class="schedule">
+					<!-- 근무자 -->
+					<table id="mm-worker-table" class="table-common worker-table">
+						<thead>
+							<tr>
+								<td><span>일근</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<!-- 스케줄 -->
+					<table id="mm-schedule-table" class="table-common schedule-table">
+						<thead>
+							<tr class="thead">
+								<td width="15%"><span>구분</span></td>
+								<td width="45%"><span>PGM명</span></td>
+								<td width="28%"><span>부터-까지</span></td>
+								<td width="12%"><span>시간</span></td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<!-- 우상 : 특기사항 -->
+				<div id="mm-desc-R" class="desc-R desc-half">				
+				</div>
+				<!-- 좌하 : 특기사항 -->
+				<div id="mm-desc-L" class="desc-L desc-half">
+					<table id="mm-desc-L-table" class="table-common desc-L-table">
+						<thead>
+							<tr>
+								<td><span>특기사항</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div>&nbsp;</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- 우하 명일예정 -->
+				<div id="next-plan">
+					<table id="next-plan-table" class="table-common table-document">
+						<thead>
+							<tr>
+								<td><span>명일 현업 예정사항</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div>&nbsp;</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		</div><!-- /report-tab -->
+
+		<!-- 탭 2: 엑셀 업로드 & ERP 입력 -->
+		<div id="excel-tab" class="tab-content active">
+			<div class="upload-area" id="upload-area">
+				<p>📂 현업일지 엑셀 파일을 여기에 드래그하거나 클릭하여 선택</p>
+				<p class="file-info">지원 형식: 현업일지(YYYY년_M월).xlsx</p>
+				<input type="file" id="excel-file" accept=".xlsx,.xls" style="display:none">
+			</div>
+			<div class="file-info" id="file-status"></div>
+			<div class="sheet-selector" id="sheet-selector" style="display:none">
+				<label>워크시트(날짜) 선택: </label>
+				<select id="sheet-select"></select>
+			</div>
+			<div id="excel-preview"></div>
+			<button class="btn-erp" id="btn-erp-input" disabled>🚀 ERP 일괄 입력 (건별 저장)</button>
+		</div>
+		<script src="./xlsx.full.min.js"></script>
+		<script src="./excel_parser.js"></script>
+		<script type="module" src="./popup.js"></script>
+	</body>
+</html>

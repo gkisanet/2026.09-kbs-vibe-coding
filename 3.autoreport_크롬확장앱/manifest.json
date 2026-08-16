@@ -1,0 +1,71 @@
+{
+	"author"			: "YoungKi Hong",
+	"name"				: "AutoReport",
+	"description"		: "CJ TV Report Helper",
+	"version"			: "1.0",	
+	"manifest_version"	: 3,
+	"default_locale"	: "en",
+	"action"			: {
+		"default_title"	: "AutoReport",
+		"default_icon"	: "favicon.ico",
+		"icons"			: {
+			"16"			: "favicon.ico",
+			"48"			: "favicon.ico",
+			"128"			: "favicon.ico"
+		}
+	},
+	"permissions"		: [
+		"nativeMessaging",
+		"storage",
+		"tabs"
+	],
+	"host_permissions"	: [
+		"*://portal.kbs.co.kr/*",
+		"*://erp.kbs.co.kr/",
+		"*://tvdss.kbs.co.kr/*",
+		"*://oauth2.googleapis.com/*",
+		"*://sheets.googleapis.com/*"
+	],
+	"background"		: {
+		"service_worker"	: "background.js",
+		"type"				: "module"
+	},
+	"content_scripts"	: [
+		{
+			"all_frames"		: true,
+			"run_at"			: "document_start",
+			"matches"			: [
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_list.htm",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_list.htm?*",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0200.htm",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0200.htm?*",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0320.htm",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0320.htm?*"
+			],
+			"js"				: [
+				"erp_fields.js",
+				"contentscript.js"
+			]
+		},
+		{
+			"all_frames"		: true,
+			"run_at"			: "document_idle",
+			"world"				: "MAIN",
+			"matches"			: [
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0200.htm",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0200.htm?*",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0320.htm",
+				"*://erp.kbs.co.kr/kbs(bD1rbyZjPTMwMA==)/zweb_ps/ins_res_reg_0320.htm?*"
+			],
+			"js"				: [
+				"override_checksave2.js"
+			]
+		}
+	],
+	"web_accessible_resources" : [
+		{
+			"resources": ["data/category.json"],
+			"matches": ["*://erp.kbs.co.kr/*"]
+		}
+	]
+}
