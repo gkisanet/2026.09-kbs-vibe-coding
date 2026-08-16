@@ -9,8 +9,8 @@
 ```mermaid
 graph TB
     subgraph Root["📁 2026.AutoReport (Project Root)"]
-        Edu["📁 1.교육자료/<br/>(AI 이론 및 Context 엔지니어링)"]
-        API["📁 2.API_TEST/<br/>(3-Tier 바이브 코딩 실습)"]
+        Edu["📁 1.교육자료/<br/>(마크다운 / 위키 / AI 이해)"]
+        API["📁 2.AI_APP/<br/>(3-Tier 바이브 코딩 실습)"]
         
         subgraph Ext["📁 3.autoreport_크롬확장앱/ (독립 패키지)"]
             ExtDocs["📁 docs/<br/>(01~07 단계별 실습 교재)"]
@@ -71,9 +71,9 @@ graph TB
 - `docs/HANDOVER.md` — 인수인계 및 ⚠️실패 이력 (지뢰밭)
 - `docs/LESSONS.md` — 트러블슈팅 오답 노트
 
-### 2.3 `1.교육자료/` & `2.API_TEST/`
-- `1.교육자료/` — AI 이론, 프롬프트 엔지니어링, Context 관리 실습 교재
-- `2.API_TEST/` — `v1_basic` (3-Tier 완성형) & `v2_extended` (바이브 코딩 작업대)
+### 2.3 `1.교육자료/` & `2.AI_APP/`
+- `1.교육자료/` — 마크다운, 나만의 위키 확장 가이드, AI 기본 이해 및 Context 실습 교재
+- `2.AI_APP/` — `v1_basic` (3-Tier 완성형) & `v2_extended` (바이브 코딩 작업대)
 
 ---
 
