@@ -1,6 +1,14 @@
 # CHANGELOG — AutoReport 변경 이력
 
-## 2026-08-16 — 루트 `README.md`를 KBS 청주총국 AI 바이브 코딩 전체 교육 과정 대문으로 전면 개정
+## 2026-08-16 — 신규 공개 GitHub 리포지토리(`2026.09-kbs-vibe-coding`) 생성 및 클린 배포
+
+### 배포 및 저장소 거버넌스
+- **과거 히스토리가 완전히 배제된 신규 리포지토리 생성 및 푸시**:
+  - GitHub 리포지토리 생성: [`https://github.com/gkisanet/2026.09-kbs-vibe-coding`](https://github.com/gkisanet/2026.09-kbs-vibe-coding) (Public)
+  - 기존의 과거 커밋 히스토리에 포함되었을 수 있는 모든 민감 정보(키, 사번 등)를 원천 차단하기 위해 **단일 클린 Initial Commit**으로 푸시 완료.
+  - `config.js`가 `.gitignore`에 의해 완벽히 격리된 상태로 배포됨.
+
+---
 
 ### 교육 과정 및 문서 체계화
 - **루트 `README.md` 전면 재작성**:

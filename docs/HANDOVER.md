@@ -1,10 +1,14 @@
 # HANDOVER - AutoReport 인수인계 정보
 
 ## 📍 현재 개발 세션 상태
-- **마지막 작업:** 루트 `README.md`를 KBS 청주총국 AI 바이브 코딩 실무 교육 전체 커리큘럼(3단계 파이프라인) 대문으로 전면 재작성 (2026-08-16)
-- **상태:** ✅ **완전 완료** — `1.교육자료/`, `2.API_TEST/`, `3.autoreport_크롬확장앱/`, `docs/`의 전체 역할과 거버넌스가 루트 대문에 완벽히 정립됨
+- **마지막 작업:** 신규 GitHub 리포지토리([`2026.09-kbs-vibe-coding`](https://github.com/gkisanet/2026.09-kbs-vibe-coding)) 생성 및 과거 커밋 히스토리가 배제된 깨끗한 Initial Commit 푸시 완료 (2026-08-16)
+- **상태:** ✅ **완전 완료** — 과거 민감 정보 유출 위험 제로, 수강생용 전체 커리큘럼 배포 완료
 
 ## 최종 완료 사항
+
+### 신규 GitHub 리포지토리 클린 배포
+- **리포지토리 URL**: https://github.com/gkisanet/2026.09-kbs-vibe-coding (Public)
+- **보안 검증 완료**: 과거 커밋 히스토리를 차단한 단일 Initial Commit만 존재하며, `config.js`는 완벽히 로컬에만 격리 보존됨
 
 ### 교육 대문 및 저장소 정체성 정립 (`README.md`)
 - **3단계 파이프라인 로드맵 시각화**: Mermaid 다이어그램을 통한 학습 흐름 안내
