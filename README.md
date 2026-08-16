@@ -30,8 +30,9 @@ graph LR
 ```text
 2026.AutoReport/
 ├── 📁 1.교육자료/                      # [Step 1] AI 기본 이론 및 프롬프트/컨텍스트 엔지니어링
-│   ├── 기본_AI 이해/                   # 초급: AI 원리, 마크다운 표준, CONTEXT 관리 실습(LAB)
-│   └── 심화_AI엔지니어링/               # 고급: 하네스(Harness), 루프(Loop), 그래프, 도구 지형도
+│   ├── 0-1. 마크다운_문서_읽는_법.md    # 초보자를 위한 마크다운(md) 렌더링 및 읽기 가이드
+│   ├── 0-2. 마크다운_문법(참고).md     # 마크다운 기본 문법 및 Mermaid 다이어그램 작성법
+│   └── 기본_AI 이해/                   # AI 작동 원리, 개발 환경 세팅, CONTEXT 관리 실습(LAB)
 │
 ├── 📁 2.API_TEST/                     # [Step 2] 3-Tier (Front-Back-DB) 바이브 코딩 실습 샌드박스
 │   ├── v1_basic/                      # Node 내장 SQLite 기반 3-Tier 완성 앱 (동작 원리 관찰용)
@@ -60,13 +61,11 @@ graph LR
 
 AI를 단순한 '채팅 봇'이 아닌 **'소프트웨어 개발 파트너'**로 활용하기 위한 필수 기반 지식을 다룹니다.
 
-- **기본_AI 이해**:
-  - `0-1. 마크다운_문서_읽는_법.md` & `0-2. 마크다운_문법.md`: AI와의 가장 효율적인 대화 형식 체득
-  - `1-1. 교육준비물.md` & `1-2. 교육과정.md`: Antigravity IDE, WSL, Node.js 환경 세팅
-  - `2. AI의_이해.md`: LLM의 작동 원리, 확률적 토큰 예측의 본질
-  - `3-0. CONTEXT_관리.md` & `3-3. CONTEXT_관리_실습(LAB).md`: Context Window 한계 극복, RAG 검색 시뮬레이션, Vercel 웹 배포 실습
-- **심화_AI엔지니어링**:
-  - AI 에이전트 아키텍처: 하네스(Harness), 자율 루프(Autonomous Loop), 워크플로우 그래프, 최신 AI 도구 지형도
+- **마크다운 표준**: `0-1. 마크다운_문서_읽는_법.md`, `0-2. 마크다운_문법.md` (AI와의 가장 효율적인 대화 형식 체득)
+- **개발 환경 구축**: `1-1. 교육준비물.md`, `1-2. 교육과정.md` (Antigravity IDE, WSL, Node.js 환경 세팅)
+- **AI 본질 이해**: `2. AI의_이해.md` (LLM의 작동 원리, 확률적 토큰 예측의 본질)
+- **Context 실습 (LAB)**: `3-0. CONTEXT_관리.md`, `3-3. CONTEXT_관리_실습(LAB).md` (Context Window 한계 극복, RAG 검색 시뮬레이션, Vercel 웹 배포 실습)
+- **사례 연구 & 도구 비교**: `3-1. 영상생성AI의_Context.md`, `3-2. 사례연구_AI_수어통역.md`, `참고1_AI_TOOLS_COMPARISON.md`, `참고2_AI_도입_판별표.md`, `참고3_AGENTS_템플릿.md`
 
 ---
 
